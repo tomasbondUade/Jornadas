@@ -25,7 +25,9 @@ class MainActivity : ReactActivity() {
         object : DefaultReactActivityDelegate(this, mainComponentName, false) {
             override fun getLaunchOptions() = Bundle().apply {
                 putString("taskKey", sessionKey)
-                putBoolean("offlineStart", intent.getBooleanExtra("sin_servicio", false))
+                putBoolean("offlineStart", intent.getBooleanExtra("sin_servicio", false) ||
+                    (intent.hasExtra("servicio_disponible") &&
+                        !intent.getBooleanExtra("servicio_disponible", true)))
             }
         }
 }
