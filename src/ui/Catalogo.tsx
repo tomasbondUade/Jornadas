@@ -12,10 +12,10 @@ export function Catalogo({abrir,dia,tema,elegirDia,elegirTema}:{abrir:(id:string
     <View style={s.fila}>{['Todos','Android','Datos','Calidad'].map(t=>
       <Opcion key={t} texto={t} activa={tema===t} accion={()=>elegirTema(t)}/>)}</View>
     <Opcion texto="Actualizar" accion={recargar}/>
-    {cargando && <Text>Consultando programa…</Text>}
-    {aviso ? <View><Text>{aviso}</Text><Opcion texto="Reintentar" accion={recargar}/></View> : null}
+    {cargando && <Text style={s.texto}>Consultando programa…</Text>}
+    {aviso ? <View><Text style={s.texto}>{aviso}</Text><Opcion texto="Reintentar" accion={recargar}/></View> : null}
     {edicionGuardada && charlas.length === 0
-      ? <Text>Sin charlas programadas.</Text>
+      ? <Text style={s.texto}>Sin charlas programadas.</Text>
       : <Lista fichas={charlas.filter(f=>(!dia || f.day===dia) && (tema==='Todos' || f.track===tema))} abrir={abrir}/>}
   </View>;
 }

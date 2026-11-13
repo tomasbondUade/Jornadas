@@ -43,7 +43,7 @@ export default function App({taskKey,offlineStart}:Inicio) {
     const valor = JSON.stringify(vista);
     escriturasVista = escriturasVista.catch(()=>{}).then(()=>configurar(clave,valor));
   },[clave,vista]);
-  return vista ? <Portada vista={vista} setVista={setVista}/> : <Text>Abriendo agenda…</Text>;
+  return vista ? <Portada vista={vista} setVista={setVista}/> : <Text style={s.texto}>Abriendo agenda…</Text>;
 }
 
 function Portada({vista,setVista}:{vista:Vista; setVista:React.Dispatch<React.SetStateAction<Vista|null>>}) {
@@ -62,20 +62,20 @@ function Portada({vista,setVista}:{vista:Vista; setVista:React.Dispatch<React.Se
     });
     return ()=>sub.remove();
   },[seccion,id]);
-  return <View style={s.pagina}><Text>Jornadas del Sur</Text>
+  return <View style={s.pagina}><Text style={s.texto}>Jornadas del Sur</Text>
     <Text style={s.titulo}>{id?'Detalle':seccion}</Text>
     <ScrollView style={{flex:1}}>
       {id ? <View><Opcion texto="Volver" accion={()=>cambiar({id:null})}/>
         {ficha && <View><Text style={s.titulo}>{ficha.title}</Text><Text style={s.texto}>
           Día {ficha.day} · {ficha.time} · {ficha.room}</Text>
-          <Text>{ficha.speaker}</Text><Text style={s.texto}>{ficha.summary}</Text>
+          <Text style={s.texto}>{ficha.speaker}</Text><Text style={s.texto}>{ficha.summary}</Text>
           <Opcion texto={ficha.favorita?'Quitar de mi agenda':'Agregar a mi agenda'} accion={()=>marcar(ficha.id)}/>
         </View>}</View>
       : seccion==='Programa' ? <Catalogo abrir={idElegido=>cambiar({id:idElegido})}
           dia={dia} tema={tema} elegirDia={nuevo=>cambiar({dia:nuevo})}
           elegirTema={nuevo=>cambiar({tema:nuevo})}/>
       : seccion==='Mesa' ? <Mesa/> : <View>
-        {!charlas.some(f=>f.favorita) && <Text>Todavía no agregaste charlas.</Text>}
+        {!charlas.some(f=>f.favorita) && <Text style={s.texto}>Todavía no agregaste charlas.</Text>}
         <Lista fichas={charlas.filter(f=>f.favorita)} abrir={idElegido=>cambiar({id:idElegido})}/></View>}
     </ScrollView>
     {!id && <View style={s.fila}>{['Programa','Mi agenda','Mesa'].map(t=>

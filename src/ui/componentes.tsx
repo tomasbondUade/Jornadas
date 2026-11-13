@@ -17,6 +17,6 @@ export function Opcion({texto,accion,activa=false}:{texto:string;accion:()=>void
 }
 export function Lista({fichas,abrir}:{fichas:Charla[];abrir:(id:string)=>void}) {
   return <View>{fichas.map(f=><Pressable key={f.id} onPress={()=>abrir(f.id)} style={s.tarjeta}>
-    <Text>Día {f.day} · {f.time} · {f.room}</Text><Text style={s.texto}>{f.title}</Text>
-    <Text>{f.track}{f.favorita ? ' · En mi agenda' : ''}</Text></Pressable>)}</View>;
+    <Text style={s.texto}>Día {f.day} · {f.time} · {f.room}</Text><Text style={s.texto}>{f.title}</Text>
+    <Text style={s.texto}>{f.track}{f.favorita ? ' · En mi agenda' : ''}</Text></Pressable>)}</View>;
 }
